@@ -1,4 +1,4 @@
 package com.pivovarit.account;
 
-class AccountUitls {
+class AccountUtils {
 }
