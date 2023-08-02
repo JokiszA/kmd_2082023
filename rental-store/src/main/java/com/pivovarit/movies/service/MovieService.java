@@ -14,7 +14,6 @@ import java.util.stream.Collectors;
 
 import static com.pivovarit.movies.mappers.MovieConverter.toPersistedMovie;
 
-@Service
 @RequiredArgsConstructor
 public class MovieService {
 
