@@ -1,4 +1,4 @@
-package com.pivovarit.movies;
+package com.pivovarit;
 
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;

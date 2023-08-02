@@ -1,14 +1,10 @@
-package com.pivovarit.movies.mappers;
+package com.pivovarit.movies;
 
 import com.pivovarit.movies.api.MovieAddRequest;
-import com.pivovarit.movies.domain.Movie;
-import com.pivovarit.movies.domain.MovieId;
-import com.pivovarit.movies.domain.MovieType;
-import com.pivovarit.movies.repository.PersistedMovie;
 import lombok.experimental.UtilityClass;
 
 @UtilityClass
-public class MovieConverter {
+class MovieConverter {
 
     public static Movie from(PersistedMovie movie) {
         return new Movie(new MovieId(movie.getId()), movie.getTitle(), MovieType.valueOf(movie.getType()));

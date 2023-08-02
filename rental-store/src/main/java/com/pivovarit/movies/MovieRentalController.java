@@ -1,10 +1,6 @@
-package com.pivovarit.movies.web;
+package com.pivovarit.movies;
 
 import com.pivovarit.movies.api.MovieAddRequest;
-import com.pivovarit.movies.domain.Movie;
-import com.pivovarit.movies.domain.MovieType;
-import com.pivovarit.movies.mappers.MovieConverter;
-import com.pivovarit.movies.service.MovieService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,9 +19,9 @@ import java.util.Optional;
 // HTTP POST /movies (tylko logowanie odebranego obiektu)
 @RestController
 @RequiredArgsConstructor
-public class MovieController {
+public class MovieRentalController {
 
-    private final MovieService movieService;
+    private final MovieRentalFacade movieService;
 
     @GetMapping("/movies")
     public List<Movie> movies(@RequestParam(required = false) MovieType type) {

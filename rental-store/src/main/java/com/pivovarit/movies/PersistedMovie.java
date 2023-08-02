@@ -1,4 +1,4 @@
-package com.pivovarit.movies.repository;
+package com.pivovarit.movies;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -6,7 +6,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "movie")
-public class PersistedMovie {
+class PersistedMovie {
 
     @Id
     private long id;

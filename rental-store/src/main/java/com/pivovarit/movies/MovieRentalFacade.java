@@ -1,21 +1,16 @@
-package com.pivovarit.movies.service;
+package com.pivovarit.movies;
 
-import com.pivovarit.movies.domain.Movie;
-import com.pivovarit.movies.domain.MovieType;
-import com.pivovarit.movies.mappers.MovieConverter;
-import com.pivovarit.movies.repository.MovieRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
 
 import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import static com.pivovarit.movies.mappers.MovieConverter.toPersistedMovie;
+import static com.pivovarit.movies.MovieConverter.toPersistedMovie;
 
 @RequiredArgsConstructor
-public class MovieService {
+public class MovieRentalFacade {
 
     private final MovieRepository movieRepository;
 
