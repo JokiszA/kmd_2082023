@@ -1,6 +1,6 @@
-CREATE TABLE movies
+CREATE TABLE movie
 (
-    id    integer NOT NULL,
+    id    bigint NOT NULL,
     title TEXT    NOT NULL,
     type  TEXT    NOT NULL
 );
