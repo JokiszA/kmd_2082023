@@ -3,6 +3,7 @@ package com.pivovarit.movies.web;
 import com.pivovarit.movies.api.MovieAddRequest;
 import com.pivovarit.movies.domain.Movie;
 import com.pivovarit.movies.domain.MovieType;
+import com.pivovarit.movies.mappers.MovieConverter;
 import com.pivovarit.movies.service.MovieService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -48,6 +49,6 @@ public class MovieController {
 
     @PostMapping("/movies")
     public void addMovie(@RequestBody MovieAddRequest dto) {
-        System.out.println(dto);
+        movieService.addMovie(MovieConverter.from(dto));
     }
 }
