@@ -11,6 +11,8 @@ public class MovieRentalFacade {
 
     private final MovieRepository movieRepository;
 
+    private final MoviePriceCalculator moviePriceCalculator;
+
     public Collection<Movie> getMovies() {
         return movieRepository.findAll();
     }
