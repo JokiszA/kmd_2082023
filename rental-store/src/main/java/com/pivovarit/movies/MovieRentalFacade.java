@@ -1,10 +1,14 @@
 package com.pivovarit.movies;
 
+import com.pivovarit.movies.api.MovieAddRequest;
+import com.pivovarit.movies.api.MovieDto;
 import lombok.RequiredArgsConstructor;
 
 import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 public class MovieRentalFacade {
@@ -13,19 +17,25 @@ public class MovieRentalFacade {
 
     private final MoviePriceCalculator moviePriceCalculator;
 
-    public Collection<Movie> getMovies() {
-        return movieRepository.findAll();
+    private final MovieDescriptionsRepository movieDescriptionsRepository;
+
+    public Collection<MovieDto> getMovies() {
+        return movieRepository.findAll().stream().map(toMovieDto()).collect(Collectors.toList());
     }
 
-    public List<Movie> getMoviesByType(MovieType type) {
-        return movieRepository.findAllByType(type);
+    public List<MovieDto> getMoviesByType(MovieType type) {
+        return movieRepository.findAllByType(type).stream().map(toMovieDto()).collect(Collectors.toList());
     }
 
-    public Optional<Movie> getMovieById(long id) {
-        return movieRepository.findOneById(new MovieId(id));
+    public Optional<MovieDto> getMovieById(long id) {
+        return movieRepository.findOneById(new MovieId(id)).map(toMovieDto());
     }
 
-    public void addMovie(Movie movie) {
-        movieRepository.save(movie);
+    public void addMovie(MovieAddRequest movieAddRequest) {
+        movieRepository.save(MovieConverter.from(movieAddRequest));
+    }
+
+    private Function<Movie, MovieDto> toMovieDto() {
+        return movie -> MovieConverter.from(movie, movieDescriptionsRepository.getByMovieId(movie.getId()).orElse(null));
     }
 }

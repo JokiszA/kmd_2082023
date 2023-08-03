@@ -1,9 +1,12 @@
 package com.pivovarit.movies;
 
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.web.client.RestTemplate;
 
 @Configuration
 class RentalStoreConfiguration {
@@ -14,14 +17,20 @@ class RentalStoreConfiguration {
     }
 
     @Bean
-    public MovieRentalFacade movieService(MovieRepository movieRepository, MoviePriceCalculator moviePriceCalculator) {
-        return new MovieRentalFacade(movieRepository, moviePriceCalculator);
+    public MovieRentalFacade movieService(MovieRepository movieRepository, MoviePriceCalculator moviePriceCalculator, MovieDescriptionsRepository movieDescriptionsRepository) {
+        return new MovieRentalFacade(movieRepository, moviePriceCalculator, movieDescriptionsRepository);
     }
 
     @Bean
     @Profile("default")
     public MovieRepository jdbcMovieRepository(JdbcTemplate jdbcTemplate) {
         return new JdbcMovieRepository(jdbcTemplate);
+    }
+
+    @Bean
+    @Profile("default")
+    public MovieDescriptionsRepository movieDescriptionsRepository(@Value("${rental.movie-descriptions-service.url}") String url, RestTemplateBuilder restTemplate) {
+        return new HttpMovieDescriptionsRepository(url, restTemplate.build());
     }
 
     /*

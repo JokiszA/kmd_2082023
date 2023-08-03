@@ -18,11 +18,12 @@ class MovieConverter {
           MovieType.valueOf(request.getType()));
     }
 
-    public static MovieDto from(Movie request) {
+    public static MovieDto from(Movie request, MovieDescriptionsRepository.MovieDescription description) {
         return new MovieDto(
           request.getId().getId(),
           request.getTitle(),
-          request.getType().toString());
+          request.getType().toString(),
+          description.description());
     }
 
     public static PersistedMovie toPersistedMovie(Movie movie) {

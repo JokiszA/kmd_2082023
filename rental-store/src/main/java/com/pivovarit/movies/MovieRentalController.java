@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 // HTTP GET /movies
 // HTTP GET /movies/{id}
@@ -28,15 +27,14 @@ public class MovieRentalController {
     @GetMapping("/movies")
     public List<MovieDto> movies(@RequestParam(required = false) MovieType type) {
         if (type != null) {
-            return movieService.getMoviesByType(type).stream().map(MovieConverter::from).collect(Collectors.toList());
+            return movieService.getMoviesByType(type);
         }
-        return new ArrayList<>(movieService.getMovies()).stream().map(MovieConverter::from)
-          .collect(Collectors.toList());
+        return new ArrayList<>(movieService.getMovies());
     }
 
     @GetMapping("/movies/{id}")
     public Optional<MovieDto> movieById(@PathVariable long id) {
-        return movieService.getMovieById(id).map(MovieConverter::from);
+        return movieService.getMovieById(id);
     }
 
     /*
@@ -48,6 +46,6 @@ public class MovieRentalController {
 
     @PostMapping("/movies")
     public void addMovie(@RequestBody MovieAddRequest dto) {
-        movieService.addMovie(MovieConverter.from(dto));
+        movieService.addMovie(dto);
     }
 }
