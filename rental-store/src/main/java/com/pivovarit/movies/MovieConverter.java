@@ -1,6 +1,7 @@
 package com.pivovarit.movies;
 
 import com.pivovarit.movies.api.MovieAddRequest;
+import com.pivovarit.movies.api.MovieDto;
 import lombok.experimental.UtilityClass;
 
 @UtilityClass
@@ -15,6 +16,13 @@ class MovieConverter {
           new MovieId(request.getId()),
           request.getTitle(),
           MovieType.valueOf(request.getType()));
+    }
+
+    public static MovieDto from(Movie request) {
+        return new MovieDto(
+          request.getId().getId(),
+          request.getTitle(),
+          request.getType().toString());
     }
 
     public static PersistedMovie toPersistedMovie(Movie movie) {

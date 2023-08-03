@@ -6,7 +6,7 @@ import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class SomeTest {
+class MovieRentalFacadeUnitTest {
 
     @Test
     void should_add_movie() {

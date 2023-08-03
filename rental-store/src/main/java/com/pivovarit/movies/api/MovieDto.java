@@ -1,5 +1,7 @@
 package com.pivovarit.movies.api;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+
 import java.util.Objects;
 
 public class MovieDto {
@@ -7,6 +9,7 @@ public class MovieDto {
     private final String title;
     private final String type;
 
+    @JsonCreator
     public MovieDto(long id, String title, String type) {
         this.id = id;
         this.title = title;

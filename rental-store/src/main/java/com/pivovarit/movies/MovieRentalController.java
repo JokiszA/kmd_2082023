@@ -1,6 +1,7 @@
 package com.pivovarit.movies;
 
 import com.pivovarit.movies.api.MovieAddRequest;
+import com.pivovarit.movies.api.MovieDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 // HTTP GET /movies
 // HTTP GET /movies/{id}
@@ -24,16 +26,17 @@ public class MovieRentalController {
     private final MovieRentalFacade movieService;
 
     @GetMapping("/movies")
-    public List<Movie> movies(@RequestParam(required = false) MovieType type) {
+    public List<MovieDto> movies(@RequestParam(required = false) MovieType type) {
         if (type != null) {
-            return movieService.getMoviesByType(type);
+            return movieService.getMoviesByType(type).stream().map(MovieConverter::from).collect(Collectors.toList());
         }
-        return new ArrayList<>(movieService.getMovies());
+        return new ArrayList<>(movieService.getMovies()).stream().map(MovieConverter::from)
+          .collect(Collectors.toList());
     }
 
     @GetMapping("/movies/{id}")
-    public Optional<Movie> movieById(@PathVariable long id) {
-        return movieService.getMovieById(id);
+    public Optional<MovieDto> movieById(@PathVariable long id) {
+        return movieService.getMovieById(id).map(MovieConverter::from);
     }
 
     /*
