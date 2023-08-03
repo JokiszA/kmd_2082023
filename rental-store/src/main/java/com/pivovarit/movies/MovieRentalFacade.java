@@ -23,8 +23,8 @@ public class MovieRentalFacade {
         return movieRepository.findAll().stream().map(toMovieDto()).collect(Collectors.toList());
     }
 
-    public List<MovieDto> getMoviesByType(MovieType type) {
-        return movieRepository.findAllByType(type).stream().map(toMovieDto()).collect(Collectors.toList());
+    public List<MovieDto> getMoviesByType(String type) {
+        return movieRepository.findAllByType(MovieType.valueOf(type)).stream().map(toMovieDto()).collect(Collectors.toList());
     }
 
     public Optional<MovieDto> getMovieById(long id) {

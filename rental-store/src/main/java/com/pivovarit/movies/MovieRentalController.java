@@ -14,10 +14,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-// HTTP GET /movies
-// HTTP GET /movies/{id}
-// HTTP GET /movies?type=NEW
-// HTTP POST /movies (tylko logowanie odebranego obiektu)
 @RestController
 @RequiredArgsConstructor
 public class MovieRentalController {
@@ -25,7 +21,7 @@ public class MovieRentalController {
     private final MovieRentalFacade movieService;
 
     @GetMapping("/movies")
-    public List<MovieDto> movies(@RequestParam(required = false) MovieType type) {
+    public List<MovieDto> movies(@RequestParam(required = false) String type) {
         if (type != null) {
             return movieService.getMoviesByType(type);
         }
