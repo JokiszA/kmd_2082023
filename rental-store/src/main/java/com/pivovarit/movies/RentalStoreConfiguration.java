@@ -10,4 +10,9 @@ class RentalStoreConfiguration {
     public MovieRentalFacade movieService(MovieRepository movieRepository) {
         return new MovieRentalFacade(movieRepository);
     }
+
+    @Bean
+    public SpringDataMovieRepositoryAdapter springDataMovieRepositoryAdapter(SpringDataMovieRepository repository) {
+        return new SpringDataMovieRepositoryAdapter(repository);
+    }
 }

@@ -1,11 +1,11 @@
 package com.pivovarit.movies;
 
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Service;
-
 import java.util.List;
+import java.util.Optional;
 
-@Service
-interface MovieRepository extends JpaRepository<PersistedMovie, Long> {
-    List<PersistedMovie> findAllByType(String type);
+interface MovieRepository {
+    List<Movie> findAll();
+    List<Movie> findAllByType(MovieType type);
+    Optional<Movie> findOneById(MovieId id);
+    void save(Movie movie);
 }

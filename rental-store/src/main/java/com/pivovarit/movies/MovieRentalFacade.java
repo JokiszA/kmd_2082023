@@ -5,9 +5,6 @@ import lombok.RequiredArgsConstructor;
 import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
-
-import static com.pivovarit.movies.MovieConverter.toPersistedMovie;
 
 @RequiredArgsConstructor
 public class MovieRentalFacade {
@@ -15,19 +12,18 @@ public class MovieRentalFacade {
     private final MovieRepository movieRepository;
 
     public Collection<Movie> getMovies() {
-        return movieRepository.findAll().stream().map(MovieConverter::from).collect(Collectors.toList());
+        return movieRepository.findAll();
     }
 
     public List<Movie> getMoviesByType(MovieType type) {
-        return movieRepository.findAllByType(type.toString()).stream().map(MovieConverter::from)
-          .collect(Collectors.toList());
+        return movieRepository.findAllByType(type);
     }
 
     public Optional<Movie> getMovieById(long id) {
-        return movieRepository.findById(id).map(MovieConverter::from);
+        return movieRepository.findOneById(new MovieId(id));
     }
 
     public void addMovie(Movie movie) {
-        movieRepository.save(toPersistedMovie(movie));
+        movieRepository.save(movie);
     }
 }
