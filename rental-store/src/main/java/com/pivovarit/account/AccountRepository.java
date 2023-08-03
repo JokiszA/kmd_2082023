@@ -1,4 +1,10 @@
 package com.pivovarit.account;
 
-class AccountRepository {
+import java.util.Optional;
+
+interface AccountRepository {
+    void associate(long userId, String accountId);
+    Optional<String> getAccountId(long userId);
+
+    String remove(long userId);
 }

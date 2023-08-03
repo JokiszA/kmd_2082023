@@ -1,20 +1,19 @@
 package com.pivovarit.account;
 
-import java.util.Arrays;
-import java.util.List;
+import lombok.RequiredArgsConstructor;
 
+import java.util.Optional;
+
+@RequiredArgsConstructor
 public class AccountFacade {
 
-    public void create() {
-        System.out.println("creating account");
+    private final AccountRepository accountRepository;
+
+    void map(long userId, String accountId) {
+        accountRepository.associate(userId, accountId);
     }
 
-    public List<String> findAll() {
-        System.out.println("creating account");
-        return Arrays.asList("a", "b");
-    }
-
-    public void delete() {
-        System.out.println("deleting account");
+    Optional<String> getAccountId(long userId) {
+        return accountRepository.getAccountId(userId);
     }
 }
