@@ -8,14 +8,6 @@ import org.springframework.context.annotation.Profile;
 class RentalStoreConfiguration {
 
     @Bean
-    @Profile("dev")
-    public MoviePriceCalculator fixedMoviePriceCalculator() {
-        return movie -> 42;
-    }
-
-    @Bean
-    @Profile("!dev")
-//    @Primary
     public MoviePriceCalculator moviePriceCalculator() {
         return new TypeBasedMoviePriceCalculator(10, 6, 8);
     }
@@ -26,6 +18,7 @@ class RentalStoreConfiguration {
     }
 
     @Bean
+    @Profile("default")
     public SpringDataMovieRepositoryAdapter springDataMovieRepositoryAdapter(SpringDataMovieRepository repository) {
         return new SpringDataMovieRepositoryAdapter(repository);
     }
