@@ -13,7 +13,7 @@ public class AccountFacade {
         accountRepository.associate(userId, accountId);
     }
 
-    Optional<String> getAccountId(long userId) {
+    Optional<Account> getAccountId(long userId) {
         return accountRepository.getAccountId(userId);
     }
 }

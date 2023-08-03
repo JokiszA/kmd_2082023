@@ -4,7 +4,7 @@ import java.util.Optional;
 
 interface AccountRepository {
     void associate(long userId, String accountId);
-    Optional<String> getAccountId(long userId);
+    Optional<Account> getAccountId(long userId);
 
-    String remove(long userId);
+    Account remove(long userId);
 }

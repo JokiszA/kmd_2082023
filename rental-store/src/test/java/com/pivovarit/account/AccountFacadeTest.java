@@ -11,7 +11,7 @@ class AccountFacadeTest {
         AccountFacade instance = instance();
 
         instance.map(42, "foo");
-        assertThat(instance.getAccountId(42)).contains("foo");
+        assertThat(instance.getAccountId(42)).contains(new Account(42, "foo"));
     }
 
     private static AccountFacade instance() {

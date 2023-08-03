@@ -6,20 +6,20 @@ import java.util.concurrent.ConcurrentHashMap;
 
 class InmemoryAccountRepository implements AccountRepository {
 
-    private final Map<Long, String> accounts = new ConcurrentHashMap<>();
+    private final Map<Long, Account> accounts = new ConcurrentHashMap<>();
 
     @Override
     public void associate(long userId, String accountId) {
-        accounts.put(userId, accountId);
+        accounts.put(userId, new Account(userId, accountId));
     }
 
     @Override
-    public Optional<String> getAccountId(long userId) {
+    public Optional<Account> getAccountId(long userId) {
         return Optional.ofNullable(accounts.get(userId));
     }
 
     @Override
-    public String remove(long userId) {
+    public Account remove(long userId) {
         return accounts.remove(userId);
     }
 }
