@@ -1,5 +1,6 @@
-package com.pivovarit.rental;
+package com.pivovarit.rental.web;
 
+import com.pivovarit.rental.MovieRentalFacade;
 import com.pivovarit.rental.api.MovieAddRequest;
 import com.pivovarit.rental.api.MovieDto;
 import com.pivovarit.rental.api.MovieRentRequest;

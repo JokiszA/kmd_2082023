@@ -22,12 +22,12 @@ class JdbcRentalRepository implements RentalRepository {
         return jdbcTemplate.query("SELECT * FROM rentals ORDER BY id", toRental());
     }
 
-    private static RowMapper<Rental> toRental() {
-        return (rs, rowNum) -> new Rental(Rental.RentalType.valueOf(rs.getString("event_type")), rs.getString("account_id"), rs.getString("movie_title"));
-    }
-
     @Override
     public List<Rental> findAllForAccount(String accountId) {
         return jdbcTemplate.query("SELECT * FROM rentals r WHERE r.account_id = ? ORDER BY id", toRental(), accountId);
+    }
+
+    private static RowMapper<Rental> toRental() {
+        return (rs, rowNum) -> new Rental(Rental.RentalType.valueOf(rs.getString("event_type")), rs.getString("account_id"), rs.getString("movie_title"));
     }
 }
