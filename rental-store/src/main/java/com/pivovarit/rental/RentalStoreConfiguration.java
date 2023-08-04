@@ -32,6 +32,12 @@ class RentalStoreConfiguration {
         return new HttpMovieDescriptionsRepository(url, restTemplate.build());
     }
 
+    @Bean
+    @Profile("default")
+    public MovieDetailsServiceHealthCheck movieDetailsServiceHealthCheck(@Value("${rental.movie-descriptions-service.url}") String url, RestTemplateBuilder restTemplate) {
+        return new MovieDetailsServiceHealthCheck(url, restTemplate.build());
+    }
+
     /*
     @Bean
     @Profile("default")
