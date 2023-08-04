@@ -1,5 +1,6 @@
 package com.pivovarit;
 
+import com.pivovarit.rental.api.event.RentalEvent;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.scheduling.annotation.EnableScheduling;

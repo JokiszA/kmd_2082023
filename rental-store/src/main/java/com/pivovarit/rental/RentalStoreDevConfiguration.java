@@ -37,4 +37,12 @@ class RentalStoreDevConfiguration {
     public RentalRepository inmemoryRentalRepository() {
         return new InmemoryRentalRepository();
     }
+
+
+    @Bean
+    @Profile("dev")
+    @Primary
+    public MessagePublisher inmemoryMessagePublisher() {
+        return new InmemoryMessagePublisher();
+    }
 }

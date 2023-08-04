@@ -28,6 +28,6 @@ class MovieRentalFacadeUnitTest {
     }
 
     private static MovieRentalFacade instance() {
-        return new MovieRentalFacade(new InmemoryMovieRepository(), new TypeBasedMoviePriceCalculator(1, 2, 3), id -> Optional.of(new MovieDescriptionsRepository.MovieDescription(FIXED_MOVIE_DESCRIPTION)), new InmemoryRentalRepository());
+        return new MovieRentalFacade(new InmemoryMovieRepository(), new TypeBasedMoviePriceCalculator(1, 2, 3), id -> Optional.of(new MovieDescriptionsRepository.MovieDescription(FIXED_MOVIE_DESCRIPTION)), new InmemoryRentalRepository(), new InmemoryMessagePublisher());
     }
 }

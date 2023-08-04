@@ -25,6 +25,8 @@ public class MovieRentalFacade {
 
     private final RentalRepository rentalRepository;
 
+    private final MessagePublisher messagePublisher;
+
     public Collection<MovieDto> getMovies() {
         return movieRepository.findAll().stream().map(toMovieDto()).collect(Collectors.toList());
     }
@@ -55,7 +57,9 @@ public class MovieRentalFacade {
             throw new IllegalStateException("Movie %s is already rented!".formatted(request.movieTitle()));
         }
 
+        // TODO solve dual-write
         rentalRepository.save(MovieConverter.from(request));
+        messagePublisher.publish(RentalEventConverter.from(request));
     }
 
     private AccountWithRentals aggregateRentalsForAccount(String accountId) {
@@ -73,7 +77,9 @@ public class MovieRentalFacade {
             throw new IllegalStateException("Movie %s is not rented by %s".formatted(request.movieTitle(), request.accountId()));
         }
 
+        // TODO solve dual-write
         rentalRepository.save(MovieConverter.from(request));
+        messagePublisher.publish(RentalEventConverter.from(request));
     }
 
     private Function<Movie, MovieDto> toMovieDto() {

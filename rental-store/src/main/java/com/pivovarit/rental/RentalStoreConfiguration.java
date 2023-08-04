@@ -1,5 +1,6 @@
 package com.pivovarit.rental;
 
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.annotation.Bean;
@@ -17,8 +18,8 @@ class RentalStoreConfiguration {
     }
 
     @Bean
-    public MovieRentalFacade movieService(MovieRepository movieRepository, MoviePriceCalculator moviePriceCalculator, MovieDescriptionsRepository movieDescriptionsRepository, RentalRepository rentalRepository) {
-        return new MovieRentalFacade(movieRepository, moviePriceCalculator, movieDescriptionsRepository, rentalRepository);
+    public MovieRentalFacade movieService(MovieRepository movieRepository, MoviePriceCalculator moviePriceCalculator, MovieDescriptionsRepository movieDescriptionsRepository, RentalRepository rentalRepository, MessagePublisher messagePublisher) {
+        return new MovieRentalFacade(movieRepository, moviePriceCalculator, movieDescriptionsRepository, rentalRepository, messagePublisher);
     }
 
     @Bean
@@ -48,6 +49,12 @@ class RentalStoreConfiguration {
     @Profile("default")
     public RentalRepository inmemoryRentalRepository(JdbcTemplate jdbcTemplate) {
         return new JdbcRentalRepository(jdbcTemplate);
+    }
+
+    @Bean
+    @Profile("default")
+    public MessagePublisher rmqMessagePublisher(RabbitTemplate rabbitTemplate) {
+        return new RabbitMQMessagePublisher(rabbitTemplate);
     }
 
     /*
