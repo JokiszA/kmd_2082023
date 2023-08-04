@@ -60,10 +60,7 @@ public class MovieRentalFacade {
 
     private AccountWithRentals aggregateRentalsForAccount(String accountId) {
         AccountWithRentals aggregated = new AccountWithRentals(accountId);
-
-        for (Rental rental : rentalRepository.findAllForAccount(accountId)) {
-            aggregated.process(rental);
-        }
+        rentalRepository.findAllForAccount(accountId).forEach(aggregated::process);
         return aggregated;
     }
 
