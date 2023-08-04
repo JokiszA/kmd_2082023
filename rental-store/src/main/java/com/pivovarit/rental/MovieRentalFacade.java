@@ -1,7 +1,7 @@
-package com.pivovarit.movies;
+package com.pivovarit.rental;
 
-import com.pivovarit.movies.api.MovieAddRequest;
-import com.pivovarit.movies.api.MovieDto;
+import com.pivovarit.rental.api.MovieAddRequest;
+import com.pivovarit.rental.api.MovieDto;
 import lombok.RequiredArgsConstructor;
 
 import java.util.Collection;

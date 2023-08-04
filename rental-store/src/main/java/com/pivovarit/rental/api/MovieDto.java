@@ -1,4 +1,4 @@
-package com.pivovarit.movies.api;
+package com.pivovarit.rental.api;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import lombok.Getter;

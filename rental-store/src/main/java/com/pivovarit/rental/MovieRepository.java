@@ -1,4 +1,4 @@
-package com.pivovarit.movies;
+package com.pivovarit.rental;
 
 import java.util.List;
 import java.util.Optional;

@@ -1,39 +1,38 @@
-package com.pivovarit.movies;
+package com.pivovarit.rental.api;
 
 import java.util.Objects;
 
-class Movie {
-
-    private final MovieId id;
+public class MovieAddRequest {
+    private final long id;
     private final String title;
-    private final MovieType type;
+    private final String type;
 
-    public Movie(MovieId id, String title, MovieType type) {
+    public MovieAddRequest(long id, String title, String type) {
         this.id = id;
         this.title = title;
         this.type = type;
+    }
+
+    public long getId() {
+        return id;
     }
 
     public String getTitle() {
         return title;
     }
 
-    public MovieType getType() {
+    public String getType() {
         return type;
-    }
-
-    public MovieId getId() {
-        return id;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Movie movie = (Movie) o;
-        return Objects.equals(id, movie.id) &&
-          Objects.equals(title, movie.title) &&
-          type == movie.type;
+        MovieAddRequest that = (MovieAddRequest) o;
+        return id == that.id &&
+          Objects.equals(title, that.title) &&
+          Objects.equals(type, that.type);
     }
 
     @Override
@@ -43,10 +42,10 @@ class Movie {
 
     @Override
     public String toString() {
-        return "Movie{" +
+        return "MovieAddRequest{" +
           "id=" + id +
           ", title='" + title + '\'' +
-          ", type=" + type +
+          ", type='" + type + '\'' +
           '}';
     }
 }

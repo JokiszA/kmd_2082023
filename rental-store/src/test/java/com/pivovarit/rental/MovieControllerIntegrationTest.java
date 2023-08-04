@@ -1,8 +1,7 @@
-package com.pivovarit.movies;
+package com.pivovarit.rental;
 
-import com.pivovarit.movies.api.MovieAddRequest;
-import com.pivovarit.movies.api.MovieDto;
-import org.assertj.core.api.Assertions;
+import com.pivovarit.rental.api.MovieAddRequest;
+import com.pivovarit.rental.api.MovieDto;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

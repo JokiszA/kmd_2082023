@@ -1,7 +1,7 @@
 package com.pivovarit.backoffice;
 
 import com.pivovarit.account.AccountFacade;
-import com.pivovarit.movies.MovieRentalFacade;
+import com.pivovarit.rental.MovieRentalFacade;
 import com.pivovarit.warehouse.WareHouseFacade;
 import lombok.RequiredArgsConstructor;
 

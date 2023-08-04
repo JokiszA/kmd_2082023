@@ -1,4 +1,4 @@
-package com.pivovarit.movies;
+package com.pivovarit.rental;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;

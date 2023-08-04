@@ -1,4 +1,4 @@
-package com.pivovarit.movies;
+package com.pivovarit.rental;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.EmptyResultDataAccessException;
