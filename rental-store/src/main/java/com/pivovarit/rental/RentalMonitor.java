@@ -15,7 +15,7 @@ class RentalMonitor {
 
     private final RentalRepository rentalRepository;
 
-    @Scheduled(cron = "* * * * * *")
+    @Scheduled(cron = "* * * * * 0")
     public void rentalMonitoring() {
         var rentals = rentalRepository.findAll();
         if (!rentals.isEmpty()) {

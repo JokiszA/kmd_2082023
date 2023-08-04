@@ -5,6 +5,7 @@ import com.pivovarit.rental.api.MovieDto;
 import com.pivovarit.rental.api.MovieRentRequest;
 import com.pivovarit.rental.api.MovieReturnRequest;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.Collection;
 import java.util.List;
@@ -13,6 +14,7 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
+@Slf4j
 public class MovieRentalFacade {
 
     private final MovieRepository movieRepository;
@@ -41,10 +43,39 @@ public class MovieRentalFacade {
     }
 
     public void rentMovie(MovieRentRequest request) {
+        AccountWithRentals aggregated = aggregateRentalsForAccount(request.accountId());
+
+        log.info(aggregated.toString());
+
+        if (aggregated.currentRentals() == 10) {
+            throw new IllegalStateException("Can't rent more than 10 movies!");
+        }
+
+        if (aggregated.isCurrentlyRented(request.movieTitle())) {
+            throw new IllegalStateException("Movie %s is already rented!".formatted(request.movieTitle()));
+        }
+
         rentalRepository.save(MovieConverter.from(request));
     }
 
+    private AccountWithRentals aggregateRentalsForAccount(String accountId) {
+        AccountWithRentals aggregated = new AccountWithRentals(accountId);
+
+        for (Rental rental : rentalRepository.findAllForAccount(accountId)) {
+            aggregated.process(rental);
+        }
+        return aggregated;
+    }
+
     public void returnMovie(MovieReturnRequest request) {
+        AccountWithRentals aggregated = aggregateRentalsForAccount(request.accountId());
+
+        log.info(aggregated.toString());
+
+        if (!aggregated.isCurrentlyRented(request.movieTitle())) {
+            throw new IllegalStateException("Movie %s is not rented by %s".formatted(request.movieTitle(), request.accountId()));
+        }
+
         rentalRepository.save(MovieConverter.from(request));
     }
 
