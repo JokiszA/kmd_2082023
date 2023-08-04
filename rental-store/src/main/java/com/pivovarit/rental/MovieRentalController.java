@@ -2,6 +2,8 @@ package com.pivovarit.rental;
 
 import com.pivovarit.rental.api.MovieAddRequest;
 import com.pivovarit.rental.api.MovieDto;
+import com.pivovarit.rental.api.MovieRentRequest;
+import com.pivovarit.rental.api.MovieReturnRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,6 +21,16 @@ import java.util.Optional;
 public class MovieRentalController {
 
     private final MovieRentalFacade movieService;
+
+    @PostMapping("/movies/rent")
+    public void rentMovie(@RequestBody MovieRentRequest movieRentRequest) {
+        movieService.rentMovie(movieRentRequest);
+    }
+
+    @PostMapping("/movies/return")
+    public void returnMovie(@RequestBody MovieReturnRequest movieReturnRequest) {
+        movieService.returnMovie(movieReturnRequest);
+    }
 
     @GetMapping("/movies")
     public List<MovieDto> movies(@RequestParam(required = false) String type) {

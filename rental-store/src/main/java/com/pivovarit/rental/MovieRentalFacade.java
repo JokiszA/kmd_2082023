@@ -2,6 +2,8 @@ package com.pivovarit.rental;
 
 import com.pivovarit.rental.api.MovieAddRequest;
 import com.pivovarit.rental.api.MovieDto;
+import com.pivovarit.rental.api.MovieRentRequest;
+import com.pivovarit.rental.api.MovieReturnRequest;
 import lombok.RequiredArgsConstructor;
 
 import java.util.Collection;
@@ -19,12 +21,15 @@ public class MovieRentalFacade {
 
     private final MovieDescriptionsRepository movieDescriptionsRepository;
 
+    private final RentalRepository rentalRepository;
+
     public Collection<MovieDto> getMovies() {
         return movieRepository.findAll().stream().map(toMovieDto()).collect(Collectors.toList());
     }
 
     public List<MovieDto> getMoviesByType(String type) {
-        return movieRepository.findAllByType(MovieType.valueOf(type)).stream().map(toMovieDto()).collect(Collectors.toList());
+        return movieRepository.findAllByType(MovieType.valueOf(type)).stream().map(toMovieDto())
+          .collect(Collectors.toList());
     }
 
     public Optional<MovieDto> getMovieById(long id) {
@@ -35,7 +40,16 @@ public class MovieRentalFacade {
         movieRepository.save(MovieConverter.from(movieAddRequest));
     }
 
+    public void rentMovie(MovieRentRequest request) {
+        rentalRepository.save(MovieConverter.from(request));
+    }
+
+    public void returnMovie(MovieReturnRequest request) {
+        rentalRepository.save(MovieConverter.from(request));
+    }
+
     private Function<Movie, MovieDto> toMovieDto() {
-        return movie -> MovieConverter.from(movie, movieDescriptionsRepository.getByMovieId(movie.getId()).orElse(null));
+        return movie -> MovieConverter.from(movie, movieDescriptionsRepository.getByMovieId(movie.getId())
+          .orElse(null));
     }
 }

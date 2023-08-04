@@ -30,4 +30,11 @@ class RentalStoreDevConfiguration {
     public MovieDescriptionsRepository movieDescriptionsRepository() {
         return id -> Optional.of(new MovieDescriptionsRepository.MovieDescription("lorem ipsum"));
     }
+
+    @Bean
+    @Profile("dev")
+    @Primary
+    public RentalRepository inmemoryRentalRepository() {
+        return new InmemoryRentalRepository();
+    }
 }

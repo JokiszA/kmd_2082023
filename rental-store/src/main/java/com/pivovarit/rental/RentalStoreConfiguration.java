@@ -16,8 +16,8 @@ class RentalStoreConfiguration {
     }
 
     @Bean
-    public MovieRentalFacade movieService(MovieRepository movieRepository, MoviePriceCalculator moviePriceCalculator, MovieDescriptionsRepository movieDescriptionsRepository) {
-        return new MovieRentalFacade(movieRepository, moviePriceCalculator, movieDescriptionsRepository);
+    public MovieRentalFacade movieService(MovieRepository movieRepository, MoviePriceCalculator moviePriceCalculator, MovieDescriptionsRepository movieDescriptionsRepository, RentalRepository rentalRepository) {
+        return new MovieRentalFacade(movieRepository, moviePriceCalculator, movieDescriptionsRepository, rentalRepository);
     }
 
     @Bean
@@ -36,6 +36,11 @@ class RentalStoreConfiguration {
     @Profile("default")
     public MovieDetailsServiceHealthCheck movieDetailsServiceHealthCheck(@Value("${rental.movie-descriptions-service.url}") String url, RestTemplateBuilder restTemplate) {
         return new MovieDetailsServiceHealthCheck(url, restTemplate.build());
+    }
+
+    @Bean
+    public RentalMonitor rentalMonitor(RentalRepository rentalRepository) {
+        return new RentalMonitor(rentalRepository);
     }
 
     /*
