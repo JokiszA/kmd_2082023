@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-class MovieDescriptionsController {
+public class MovieDescriptionsController {
 
     @GetMapping("/movie-descriptions/{movieId}")
     public ResponseEntity<Description> getDescription(@PathVariable int movieId) {
