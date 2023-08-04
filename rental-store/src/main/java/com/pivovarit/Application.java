@@ -1,10 +1,10 @@
 package com.pivovarit;
 
-import com.pivovarit.rental.api.event.RentalEvent;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
+// https://forms.gle/6F3jzeADCQc1V1C77
 @EnableScheduling
 @SpringBootApplication
 public class Application {
